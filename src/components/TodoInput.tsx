@@ -25,8 +25,6 @@ export default function TodoInput() {
 
   const { addTodo } = useTodoListContext();
 
-  console.log(errors);
-
   const onClear = () => {
     clearErrors("text");
     clearErrors("schedule");

@@ -17,15 +17,14 @@ export default function TodoEditButton({ todo }: Props) {
     control,
     handleSubmit,
     clearErrors,
-    reset,
     formState: { errors },
     getFieldState,
   } = useForm<EditTodo>({
     defaultValues: {
-      text: todo.text,
+      text: "",
       schedule: {
-        startDate: todo.startDate,
-        endDate: todo.deadline,
+        startDate: new Date(),
+        endDate: new Date(),
       },
     },
     mode: "onChange",
@@ -49,7 +48,6 @@ export default function TodoEditButton({ todo }: Props) {
       startDate: data.schedule.startDate,
       deadline: data.schedule.endDate,
     });
-    reset();
     openNotification("success");
     handleClose();
   };
@@ -63,7 +61,6 @@ export default function TodoEditButton({ todo }: Props) {
     modalHandler: (e: FormEvent) => {
       const todoInvalid = getFieldState("text").invalid;
       const scheduleInvalid = getFieldState("schedule").invalid;
-      console.log(getFieldState("text"));
       if (errors.text || errors.schedule || todoInvalid || scheduleInvalid) {
         openNotification("error");
         clearErrors("text");
@@ -89,7 +86,6 @@ export default function TodoEditButton({ todo }: Props) {
         onOk={handleOk}
         okText="Edit"
         cancelText="Cancel"
-        // footer={[]}
       >
         <Flex vertical gap="small">
           <div>수정할 내용을 입력해주세요</div>
@@ -102,13 +98,15 @@ export default function TodoEditButton({ todo }: Props) {
                   validate: (value) =>
                     value.length >= 3 || "3글자 이상 입력해주세요",
                 }}
-                render={({ field }) => (
-                  <Input
-                    {...field}
-                    placeholder="할 일을 입력해주세요"
-                    prefix={<UserOutlined />}
-                  />
-                )}
+                render={({ field }) => {
+                  return (
+                    <Input
+                      {...field}
+                      placeholder={todo.text}
+                      prefix={<UserOutlined />}
+                    />
+                  );
+                }}
               />
               <Controller
                 control={control}
