@@ -2,7 +2,6 @@ import { List, Radio, RadioChangeEvent } from "antd";
 import { useTodoListContext } from "../hooks/contexts/useTodoListProvider";
 import { Content } from "antd/es/layout/layout";
 
-import EmptyView from "./EmptyView";
 import TodoItem from "./TodoItem";
 import { useState } from "react";
 
