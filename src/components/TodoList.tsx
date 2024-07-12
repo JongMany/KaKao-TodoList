@@ -33,39 +33,34 @@ export default function TodoList() {
         minWidth: "70%",
       }}
     >
-      {todoList.length > 0 ? (
-        <List
-          style={{
-            width: "100%",
-          }}
-          header={
-            <>
-              <h2>Todo List</h2>
-              <div>
-                <Radio.Group value={doneStatus} onChange={onChangeDoneStatue}>
-                  <Radio.Button value="all">All</Radio.Button>
-                  <Radio.Button value="todo">Todo</Radio.Button>
-                  <Radio.Button value="done">Done</Radio.Button>
-                </Radio.Group>
-              </div>
-            </>
-          }
-          size="large"
-          bordered
-          dataSource={filteredTodoList}
-          renderItem={(todo) => (
-            <List.Item>
-              <List.Item.Meta
-                title={todo.text}
-                description={<TodoItem todo={todo} />}
-              />
-            </List.Item>
-          )}
-        />
-      ) : (
-        // todoList.map((todo) => <TodoItem key={todo.id} todo={todo} />)
-        <EmptyView />
-      )}
+      <List
+        style={{
+          width: "100%",
+        }}
+        header={
+          <>
+            <h2>Todo List</h2>
+            <div>
+              <Radio.Group value={doneStatus} onChange={onChangeDoneStatue}>
+                <Radio.Button value="all">All</Radio.Button>
+                <Radio.Button value="todo">Todo</Radio.Button>
+                <Radio.Button value="done">Done</Radio.Button>
+              </Radio.Group>
+            </div>
+          </>
+        }
+        size="large"
+        bordered
+        dataSource={filteredTodoList}
+        renderItem={(todo) => (
+          <List.Item>
+            <List.Item.Meta
+              title={todo.text}
+              description={<TodoItem todo={todo} />}
+            />
+          </List.Item>
+        )}
+      />
     </Content>
   );
 }
